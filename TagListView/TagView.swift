@@ -200,9 +200,9 @@ open class TagView: UIButton {
             size = attributedText.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude), options: [], context: nil).size
         } else {
             #if swift(>=4)
-                size = titleLabel?.text?.size(withAttributes: [NSAttributedStringKey.foregroundColor: textFont]) ?? CGSize.zero
+                size = titleLabel?.text?.size(withAttributes: [NSAttributedStringKey.font: textFont]) ?? CGSize.zero
             #else
-                size = titleLabel?.text?.size(attributes: [NSForegroundColorAttributeName: textFont]) ?? CGSize.zero
+                size = titleLabel?.text?.size(attributes: [NSFontAttributeName: textFont]) ?? CGSize.zero
             #endif
         }
         size.height = textFont.pointSize + paddingY * 2
