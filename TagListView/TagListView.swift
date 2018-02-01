@@ -212,9 +212,9 @@ open class TagListView: UIView {
     // MARK: - Interface Builder
     
     open override func prepareForInterfaceBuilder() {
-        addTag("Welcome")
-        addTag("to")
-        addTag("TagListView").isSelected = true
+        addTag(title: "Welcome")
+        addTag(title: "to")
+        addTag(title: "TagListView").isSelected = true
     }
     
     // MARK: - Layout
@@ -293,7 +293,7 @@ open class TagListView: UIView {
         return CGSize(width: frame.width, height: height)
     }
     
-    private func createNewTagView(_ title: String) -> TagView {
+    private func createNewTagView(title: String) -> TagView {
         let tagView = TagView(title: title)
         
         tagView.textColor = textColor
@@ -325,17 +325,61 @@ open class TagListView: UIView {
         
         return tagView
     }
+    
+    private func createNewTagView(attributedTitle: NSAttributedString) -> TagView {
+        let tagView = TagView(attributedTitle: attributedTitle)
+        
+        tagView.tagBackgroundColor = tagBackgroundColor
+        tagView.highlightedBackgroundColor = tagHighlightedBackgroundColor
+        tagView.selectedBackgroundColor = tagSelectedBackgroundColor
+        tagView.cornerRadius = cornerRadius
+        tagView.borderWidth = borderWidth
+        tagView.borderColor = borderColor
+        tagView.selectedBorderColor = selectedBorderColor
+        tagView.paddingX = paddingX
+        tagView.paddingY = paddingY
+        tagView.textFont = textFont
+        tagView.removeIconLineWidth = removeIconLineWidth
+        tagView.removeButtonIconSize = removeButtonIconSize
+        tagView.enableRemoveButton = enableRemoveButton
+        tagView.removeIconLineColor = removeIconLineColor
+        tagView.addTarget(self, action: #selector(tagPressed(_:)), for: .touchUpInside)
+        tagView.removeButton.addTarget(self, action: #selector(removeButtonPressed(_:)), for: .touchUpInside)
+        
+        // On long press, deselect all tags except this one
+        tagView.onLongPress = { [unowned self] this in
+            for tag in self.tagViews {
+                tag.isSelected = (tag == this)
+            }
+        }
+        
+        return tagView
+    }
 
     @discardableResult
-    open func addTag(_ title: String) -> TagView {
-        return addTagView(createNewTagView(title))
+    open func addTag(title: String) -> TagView {
+        return addTagView(createNewTagView(title: title))
+    }
+    
+    @discardableResult
+    open func addTag(attributedTitle: NSAttributedString) -> TagView {
+        return addTagView(createNewTagView(attributedTitle: attributedTitle))
     }
     
     @discardableResult
     open func addTags(_ titles: [String]) -> [TagView] {
         var tagViews: [TagView] = []
         for title in titles {
-            tagViews.append(createNewTagView(title))
+            tagViews.append(createNewTagView(title: title))
+        }
+        return addTagViews(tagViews)
+    }
+    
+    @discardableResult
+    open func addTags(attributedTitles: [NSAttributedString]) -> [TagView] {
+        var tagViews: [TagView] = []
+        for title in attributedTitles {
+            tagViews.append(createNewTagView(attributedTitle: title))
         }
         return addTagViews(tagViews)
     }
@@ -351,8 +395,13 @@ open class TagListView: UIView {
     }
 
     @discardableResult
-    open func insertTag(_ title: String, at index: Int) -> TagView {
-        return insertTagView(createNewTagView(title), at: index)
+    open func insertTag(title: String, at index: Int) -> TagView {
+        return insertTagView(createNewTagView(title: title), at: index)
+    }
+    
+    @discardableResult
+    open func insertTag(attributedTitle: NSAttributedString, at index: Int) -> TagView {
+        return insertTagView(createNewTagView(attributedTitle: attributedTitle), at: index)
     }
     
     @discardableResult

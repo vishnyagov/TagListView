@@ -212,7 +212,9 @@
 				TargetAttributes = {
 					1A6076B81AFED303009EA00E = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = P3T7NG5D3V;
 						LastSwiftMigration = 0900;
+						ProvisioningStyle = Manual;
 					};
 					1AD176F31B6D73E70081F615 = {
 						CreatedOnToolsVersion = 6.4;
@@ -416,10 +418,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = P3T7NG5D3V;
 				INFOPLIST_FILE = TagListViewDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "build.ela.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ltst.TagListViewDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c0dfd1f7-de02-46f0-a016-e51d9b4cb66c";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.ltst.*";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -429,10 +435,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = P3T7NG5D3V;
 				INFOPLIST_FILE = TagListViewDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "build.ela.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ltst.TagListViewDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "59098ee7-4352-4cc7-ad7d-d3840aa26b15";
+				PROVISIONING_PROFILE_SPECIFIER = "match InHouse com.ltst.*";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;

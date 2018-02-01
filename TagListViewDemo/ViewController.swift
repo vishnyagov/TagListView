@@ -18,23 +18,23 @@ class ViewController: UIViewController, TagListViewDelegate {
         super.viewDidLoad()
         
         tagListView.delegate = self
-        tagListView.addTag("TagListView")
-        tagListView.addTag("TEAChart")
-        tagListView.addTag("To Be Removed")
-        tagListView.addTag("To Be Removed")
-        tagListView.addTag("Quark Shell")
+        tagListView.addTag(title: "TagListView")
+        tagListView.addTag(title: "TEAChart")
+        tagListView.addTag(title: "To Be Removed")
+        tagListView.addTag(title: "To Be Removed")
+        tagListView.addTag(title: "Quark Shell")
         tagListView.removeTag("To Be Removed")
-        tagListView.addTag("On tap will be removed").onTap = { [weak self] tagView in
+        tagListView.addTag(title: "On tap will be removed").onTap = { [weak self] tagView in
             self?.tagListView.removeTagView(tagView)
         }
         
-        let tagView = tagListView.addTag("gray")
+        let tagView = tagListView.addTag(title: "gray")
         tagView.tagBackgroundColor = UIColor.gray
         tagView.onTap = { tagView in
             print("Don’t tap me!")
         }
 
-        tagListView.insertTag("This should be the third tag", at: 2)
+        tagListView.insertTag(title: "This should be the third tag", at: 2)
         
         biggerTagListView.delegate = self
         biggerTagListView.textFont = UIFont.systemFont(ofSize: 15)
@@ -42,9 +42,9 @@ class ViewController: UIViewController, TagListViewDelegate {
         biggerTagListView.shadowOpacity = 0.4
         biggerTagListView.shadowColor = UIColor.black
         biggerTagListView.shadowOffset = CGSize(width: 1, height: 1)
-        biggerTagListView.addTag("Inboard")
-        biggerTagListView.addTag("Pomotodo")
-        biggerTagListView.addTag("Halo Word")
+        biggerTagListView.addTag(title: "Inboard")
+        biggerTagListView.addTag(title: "Pomotodo")
+        biggerTagListView.addTag(title: "Halo Word")
         biggerTagListView.alignment = .center
         
         biggestTagListView.delegate = self
@@ -53,6 +53,28 @@ class ViewController: UIViewController, TagListViewDelegate {
         biggestTagListView.addTags(["all", "your", "tag", "are", "belong", "to", "us"])
         biggestTagListView.alignment = .right
         
+        // posible create tags with from attributed text
+        
+        let mutableAttributeString = NSMutableAttributedString()
+        
+        let textAttachment = NSTextAttachment()
+        textAttachment.image = #imageLiteral(resourceName: "example_image")
+        let attStrWithAttachment = NSMutableAttributedString(attributedString: NSAttributedString(attachment: textAttachment))
+        attStrWithAttachment.addAttributes([NSAttributedStringKey.baselineOffset: -2], range: NSRange(location: 0, length: attStrWithAttachment.length))
+        
+        mutableAttributeString.append(attStrWithAttachment)
+        
+        let attributedString = NSMutableAttributedString(string: " Attributed Text")
+        attributedString.addAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)], range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttributes([NSAttributedStringKey.foregroundColor: UIColor.green], range: NSRange(location: 0, length: 11))
+        attributedString.addAttributes([NSAttributedStringKey.foregroundColor: UIColor.blue], range: NSRange(location: 11, length: 5))
+        
+        mutableAttributeString.append(attributedString)
+        
+        let attributedTag = biggerTagListView.addTag(attributedTitle: mutableAttributeString)
+        attributedTag.tagBackgroundColor = UIColor.white
+        attributedTag.selectedBackgroundColor = UIColor.gray
+        attributedTag.highlightedBackgroundColor = UIColor.gray
     }
     
     override func didReceiveMemoryWarning() {

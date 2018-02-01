@@ -152,6 +152,8 @@ open class TagView: UIButton {
     open var onTap: ((TagView) -> Void)?
     open var onLongPress: ((TagView) -> Void)?
     
+    private var hasAttributedTitle: Bool = false
+    
     // MARK: - init
     
     required public init?(coder aDecoder: NSCoder) {
@@ -163,6 +165,14 @@ open class TagView: UIButton {
     public init(title: String) {
         super.init(frame: CGRect.zero)
         setTitle(title, for: UIControlState())
+        
+        setupView()
+    }
+    
+    public init(attributedTitle: NSAttributedString) {
+        super.init(frame: CGRect.zero)
+        hasAttributedTitle = true
+        setAttributedTitle(attributedTitle, for: UIControlState())
         
         setupView()
     }
@@ -185,7 +195,12 @@ open class TagView: UIButton {
     // MARK: - layout
 
     override open var intrinsicContentSize: CGSize {
-        var size = titleLabel?.text?.size(withAttributes: [NSAttributedStringKey.font: textFont]) ?? CGSize.zero
+        var size: CGSize!
+        if hasAttributedTitle, let attributedText = titleLabel?.attributedText {
+            size = attributedText.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude), options: [], context: nil).size
+        } else {
+            size = titleLabel?.text?.size(withAttributes: [.font: textFont]) ?? CGSize.zero
+        }
         size.height = textFont.pointSize + paddingY * 2
         size.width += paddingX * 2
         if size.width < size.height {
