@@ -427,7 +427,7 @@
 				PROVISIONING_PROFILE = "c0dfd1f7-de02-46f0-a016-e51d9b4cb66c";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.ltst.*";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -446,7 +446,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match InHouse com.ltst.*";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

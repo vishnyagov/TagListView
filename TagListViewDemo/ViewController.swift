@@ -60,14 +60,14 @@ class ViewController: UIViewController, TagListViewDelegate {
         let textAttachment = NSTextAttachment()
         textAttachment.image = #imageLiteral(resourceName: "example_image")
         let attStrWithAttachment = NSMutableAttributedString(attributedString: NSAttributedString(attachment: textAttachment))
-        attStrWithAttachment.addAttributes([NSAttributedStringKey.baselineOffset: -2], range: NSRange(location: 0, length: attStrWithAttachment.length))
+        attStrWithAttachment.addAttributes([NSBaselineOffsetAttributeName: -2], range: NSRange(location: 0, length: attStrWithAttachment.length))
         
         mutableAttributeString.append(attStrWithAttachment)
         
         let attributedString = NSMutableAttributedString(string: " Attributed Text")
-        attributedString.addAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)], range: NSRange(location: 0, length: attributedString.length))
-        attributedString.addAttributes([NSAttributedStringKey.foregroundColor: UIColor.green], range: NSRange(location: 0, length: 11))
-        attributedString.addAttributes([NSAttributedStringKey.foregroundColor: UIColor.blue], range: NSRange(location: 11, length: 5))
+        attributedString.addAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 15)], range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttributes([NSForegroundColorAttributeName: UIColor.green], range: NSRange(location: 0, length: 11))
+        attributedString.addAttributes([NSForegroundColorAttributeName: UIColor.blue], range: NSRange(location: 11, length: 5))
         
         mutableAttributeString.append(attributedString)
         

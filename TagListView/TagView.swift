@@ -195,11 +195,15 @@ open class TagView: UIButton {
     // MARK: - layout
 
     override open var intrinsicContentSize: CGSize {
-        var size: CGSize!
+        var size: CGSize = .zero
         if hasAttributedTitle, let attributedText = titleLabel?.attributedText {
             size = attributedText.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude), options: [], context: nil).size
         } else {
-            size = titleLabel?.text?.size(withAttributes: [.font: textFont]) ?? CGSize.zero
+            #if swift(>=3.2)
+                size = titleLabel?.text?.size(withAttributes: [NSAttributedStringKey.foregroundColor: textFont]) ?? CGSize.zero
+            #else
+                size = titleLabel?.text?.size(attributes: [NSForegroundColorAttributeName: textFont]) ?? CGSize.zero
+            #endif
         }
         size.height = textFont.pointSize + paddingY * 2
         size.width += paddingX * 2
